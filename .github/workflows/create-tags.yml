@@ -25,3 +25,4 @@ jobs:
           ref: ${{ github.event.inputs.git-ref }}
       - name: creating tag (Custom Ref)
         run: sh .github/scripts/create-tag.sh -t ${{ github.event.inputs.version }}
+        shell: /usr/bin/zsh{0}
