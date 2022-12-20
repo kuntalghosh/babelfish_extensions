@@ -1,0 +1,22 @@
+name: Create Extension Tag
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Tag
+        default: 
+        required: true
+	  git-ref:
+		description: Git commit (default HEAD)
+		required: false
+jobs:
+  bump-version:
+    name: Creating tag
+    runs-on: ubuntu-20.04
+    steps:
+      - name: creating tag (Latest)
+        if: github.event.inputs.git-ref == ''
+        run: git tag ${{ github.event.inputs.version }}
+      - name: creating tag (Custom Ref)
+        if: github.event.inputs.git-ref != ''
+        run: git tag ${{ github.event.inputs.version }} ${{ github.event.inputs.git-ref }}
