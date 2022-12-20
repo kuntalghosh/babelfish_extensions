@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 export usage="$(basename "$0") [-h] [-c commit] [-r repo][-m]\n
   -h    help\n
   -c    commit hash; Default commit:HEAD\n
@@ -26,9 +28,16 @@ fi
 # version by 1.
 if [ -z "$new" ]
 then
-# get latest tag
-	t=$(git describe --tags `git rev-list --tags --max-count=1`)
-	new=$(echo $t | sed -r 's/(BABEL_[0-9]+_[0-9]+_)([0-9]+)/echo "\1$((\2+1))"/ge') 
+	echo "Error: Tag not provided!"
+	exit 1
+fi
+
+# check the tag format
+format=BABEL_2_2_
+if ! [[ "$new" =~ "$forma"t[0-9]+ ]]
+then
+	echo "Error: Invalid tag prefix, expected: ${format}<number>"
+	exit 1
 fi
 
 # get repo name from git
