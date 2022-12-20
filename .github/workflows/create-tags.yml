@@ -4,11 +4,10 @@ on:
     inputs:
       version:
         description: Tag
-        default: 
         required: true
-	  git-ref:
-		description: Git commit (default HEAD)
-		required: false
+      git-ref:
+        description: Git commit (default HEAD)
+        required: false
 jobs:
   bump-version:
     name: Creating tag
