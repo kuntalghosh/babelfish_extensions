@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -34,7 +34,7 @@ fi
 
 # check the tag format
 format=BABEL_2_2_
-if ! [[ "$new" =~ "$forma"t[0-9]+ ]]
+if ! [[ "$new" =~ "$format"[0-9]+ ]]
 then
 	echo "Error: Invalid tag prefix, expected: ${format}<number>"
 	exit 1
