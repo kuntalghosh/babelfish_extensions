@@ -13,9 +13,13 @@ jobs:
     name: Creating tag
     runs-on: ubuntu-20.04
     steps:
-      - name: creating tag (Latest)
+      - name: Clone Repository (Latest)
+        uses: actions/checkout@v3
         if: github.event.inputs.git-ref == ''
-        run: git tag ${{ github.event.inputs.version }}
-      - name: creating tag (Custom Ref)
+      - name: Clone Repository (Custom Ref)
+        uses: actions/checkout@v3
         if: github.event.inputs.git-ref != ''
-        run: git tag ${{ github.event.inputs.version }} ${{ github.event.inputs.git-ref }}
+        with:
+          ref: ${{ github.event.inputs.git-ref }}
+      - name: creating tag (Custom Ref)
+        run: git tag ${{ github.event.inputs.version }}
