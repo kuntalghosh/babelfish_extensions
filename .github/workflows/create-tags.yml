@@ -13,6 +13,8 @@ jobs:
     name: Creating tag
     runs-on: ubuntu-20.04
     steps:
+      - name: Install zsh
+        run: sudo apt-get update; sudo apt-get install zsh
       - name: Clone Repository (Latest)
         uses: actions/checkout@v3
         if: github.event.inputs.git-ref == ''
@@ -23,4 +25,3 @@ jobs:
           ref: ${{ github.event.inputs.git-ref }}
       - name: creating tag (Custom Ref)
         run: sh .github/scripts/create-tag.sh -t ${{ github.event.inputs.version }}
-        shell: /usr/bin/zsh{0}
