@@ -1,0 +1,14 @@
+name: 'Install Kerberos Dependencies'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Kerberos Dependencies
+      run: |
+        cd ~
+        export DEBIAN_FRONTEND=noninteractive
+        sudo -E apt-get install krb5-admin-server krb5-kdc krb5-user libkrb5-dev -y -qq
+
+        export PERL_MM_USE_DEFAULT=1
+        sudo perl -MCPAN -e 'install IPC::Run'
+      shell: bash
